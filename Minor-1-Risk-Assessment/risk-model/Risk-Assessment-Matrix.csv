@@ -1,1 +1,2 @@
 ID,Asset,Threat,Vulnerability,Existing Controls,Likelihood,Impact,Risk Score,Risk Level,NIST CSF Function,Recommended Controls,Residual Likelihood,Residual Impact,Residual Risk Score,Status
+R-001,Employee email account,Phishing,Lack of employee awareness and insufficient authentication controls,"Basic antivirus; password authentication; informal awareness training",5,4,20,Critical,Protect / Detect / Respond,"Security awareness training; Multi-factor authentication (MFA); Email filtering",2,4,8,Open
