@@ -239,12 +239,165 @@ Detailed risk assessments for each case study will be documented below.
 
 ### Retail & E-commerce
 
-To be completed.
+#### Primary Risk Assessment
+
+**Asset:** Customer information and e-commerce customer accounts
+
+**Threat:** Unauthorized account access
+
+**Vulnerability:** Inconsistent multi-factor authentication and weak authentication practices
+
+**Existing Controls:**
+
+- Password authentication
+- Basic access controls
+- Basic endpoint protection
+- MFA is not consistently enabled
+
+**Likelihood:** 4 — High
+
+**Impact:** 5 — Very High
+
+**Initial Risk Score:**
+
+**4 × 5 = 20 — Critical**
+
+#### NIST CSF Mapping
+
+Protect / Detect / Respond
+
+#### Recommended Controls
+
+- Multi-factor authentication (MFA)
+- Strong authentication and password controls
+- Account monitoring
+- Access controls
+- Security logging
+
+#### Expected Effect
+
+The recommended controls are intended to reduce the likelihood of unauthorized account access by strengthening authentication, improving access control, and increasing visibility into suspicious account activity.
+
+#### Residual Risk
+
+The expected residual likelihood is reduced from 4 (High) to 2 (Low), while the potential impact remains 5 (Very High).
+
+#### Residual Risk Score
+
+**2 × 5 = 10 — High**
+
+#### Validation Result
+
+The framework identified unauthorized account access as a high-priority risk in this e-commerce environment. The result demonstrates that the framework can prioritize risks based on the specific assets and exposure of the business rather than applying identical priorities to every SME.
+
 
 ### IT Services
 
-To be completed.
+#### Primary Risk Assessment
+
+**Asset:** Administrative accounts and client systems
+
+**Threat:** Privileged account compromise
+
+**Vulnerability:** MFA is not consistently enforced and administrative access is not regularly reviewed
+
+**Existing Controls:**
+
+- Endpoint protection
+- Password-based authentication
+- Limited administrative access controls
+- MFA enabled for some critical services
+- Limited security monitoring
+
+**Likelihood:** 4 — High
+
+**Impact:** 5 — Very High
+
+**Initial Risk Score:**
+
+**4 × 5 = 20 — Critical**
+
+#### NIST CSF Mapping
+
+Govern / Protect / Detect / Respond
+
+#### Recommended Controls
+
+- Mandatory MFA for administrative accounts
+- Role-Based Access Control (RBAC)
+- Least-privilege access
+- Privileged account monitoring
+- Periodic access reviews
+- Security logging
+
+#### Expected Effect
+
+The recommended controls are intended to reduce the likelihood of privileged account compromise by strengthening authentication, limiting unnecessary administrative privileges, and improving monitoring of high-risk accounts.
+
+#### Residual Risk
+
+The expected residual likelihood is reduced from 4 (High) to 2 (Low), while the potential impact remains 5 (Very High).
+
+#### Residual Risk Score
+
+**2 × 5 = 10 — High**
+
+#### Validation Result
+
+The framework identified privileged account compromise as a critical risk in the IT services environment. The higher potential impact reflects the possibility that compromised administrative access could affect company systems as well as client-related systems or information.
+
 
 ### Healthcare / Clinic
 
-To be completed.
+#### Primary Risk Assessment
+
+**Asset:** Electronic health records and patient information
+
+**Threat:** Ransomware
+
+**Vulnerability:** Software updates are not centrally managed and backup restoration is not regularly tested
+
+**Existing Controls:**
+
+- Endpoint protection
+- Password-based authentication
+- Backups are maintained
+- Software updates are performed but not centrally managed
+- Informal security awareness training
+
+**Likelihood:** 4 — High
+
+**Impact:** 5 — Very High
+
+**Initial Risk Score:**
+
+**4 × 5 = 20 — Critical**
+
+#### NIST CSF Mapping
+
+Identify / Protect / Respond / Recover
+
+#### Recommended Controls
+
+- Centralized patch management
+- Regular backup restoration testing
+- Offline or isolated backups
+- Multi-factor authentication (MFA)
+- Endpoint protection
+- Incident response procedures
+
+#### Expected Effect
+
+The recommended controls are intended to reduce the likelihood of ransomware affecting healthcare systems by improving patch management and authentication while strengthening endpoint protection and recovery capabilities.
+
+#### Residual Risk
+
+The expected residual likelihood is reduced from 4 (High) to 2 (Low), while the potential impact remains 5 (Very High).
+
+#### Residual Risk Score
+
+**2 × 5 = 10 — High**
+
+#### Validation Result
+
+The framework identified ransomware affecting electronic health records and patient information as a critical risk in the healthcare environment. The result demonstrates that the framework can account for the high importance of sensitive information and operational continuity when prioritizing risks.
