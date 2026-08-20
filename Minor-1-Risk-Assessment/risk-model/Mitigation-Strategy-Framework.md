@@ -29,3 +29,31 @@ Security controls should:
 The primary treatment approach in this project is risk reduction through appropriate cybersecurity controls.
 
 Residual risk will be reassessed after the recommended controls are applied.
+
+## R-001 — Phishing
+
+### Identified Vulnerability
+
+Lack of employee awareness and inconsistent multi-factor authentication.
+
+### Recommended Controls
+
+- Security awareness training
+- Multi-factor authentication (MFA)
+- Email filtering
+
+### NIST CSF Mapping
+
+Protect / Detect / Respond
+
+### Expected Effect
+
+These controls are intended to reduce the likelihood of successful phishing-based account compromise by improving employee awareness, strengthening authentication, and filtering suspicious messages.
+
+### Residual Risk
+
+The expected residual likelihood is reduced from 5 (Very High) to 2 (Low), while the potential impact remains 4 (High).
+
+Residual Risk Score:
+
+**2 × 4 = 8 — Moderate**
