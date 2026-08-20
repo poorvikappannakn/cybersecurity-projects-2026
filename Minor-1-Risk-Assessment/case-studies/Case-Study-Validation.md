@@ -223,9 +223,9 @@ The same 1–5 likelihood and 1–5 impact methodology is applied to each case s
 
 | Case Study | Primary Risk | Likelihood | Impact | Initial Risk | Risk Level | Residual Risk | Residual Level |
 |---|---|---:|---:|---:|---|---:|---|
-| Retail & E-commerce | To be assessed | - | - | - | - | - | - |
-| IT Services | To be assessed | - | - | - | - | - | - |
-| Healthcare / Clinic | To be assessed | - | - | - | - | - | - |
+| Retail & E-commerce | Unauthorized account access | 4 | 5 | 20 | Critical | 10 | High |
+| IT Services | Privileged account compromise | 4 | 5 | 20 | Critical | 10 | High |
+| Healthcare / Clinic | Ransomware | 4 | 5 | 20 | Critical | 10 | High |
 
 ## Validation Observation
 
