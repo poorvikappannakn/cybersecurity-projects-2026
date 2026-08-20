@@ -471,3 +471,133 @@ Using the same sequence across different businesses provides a repeatable assess
 The case-study results indicate that the proposed framework can be used to identify, prioritize, and mitigate cybersecurity risks in different SME environments while maintaining a consistent risk evaluation methodology.
 
 The validation also demonstrates that risk priorities and mitigation strategies should be adapted to the specific business context rather than applying identical cybersecurity controls to every organization.
+
+---
+
+# SME Cybersecurity Best Practices
+
+The following best practices were identified from the risk assessment, mitigation analysis, case-study validation, and relevant NIST cybersecurity guidance.
+
+## 1. Maintain an Asset Inventory
+
+SMEs should maintain an up-to-date record of important hardware, software, accounts, data, systems, and services.
+
+Knowing what assets exist helps organizations identify which systems require protection and prioritize cybersecurity resources.
+
+## 2. Use Multi-Factor Authentication
+
+Multi-factor authentication (MFA) should be enabled wherever available, particularly for administrator accounts, remote access, email, cloud services, and systems containing sensitive information.
+
+Phishing-resistant authentication should be considered for high-value applications and privileged users where practical.
+
+## 3. Apply Least Privilege
+
+Employees should receive only the access required to perform their responsibilities.
+
+Administrative privileges should be restricted, reviewed periodically, and monitored for unusual activity.
+
+## 4. Maintain Secure and Tested Backups
+
+Important business data should be backed up regularly.
+
+SMEs should also periodically test restoration procedures rather than assuming that a backup will work when needed.
+
+Where appropriate, isolated or offline backup copies should be maintained to reduce the risk of ransomware affecting both production systems and backups.
+
+## 5. Keep Systems and Software Updated
+
+SMEs should maintain an inventory of software and systems and establish a process for applying security updates.
+
+Critical vulnerabilities should be prioritized according to their potential impact and exposure.
+
+## 6. Train Employees to Recognize Cybersecurity Threats
+
+Employees should receive regular cybersecurity awareness training covering threats such as:
+
+- Phishing
+- Malicious attachments
+- Suspicious links
+- Password security
+- Social engineering
+- Reporting suspected incidents
+
+Employee awareness is particularly important because many attacks attempt to exploit human behavior.
+
+## 7. Implement Basic Security Monitoring
+
+SMEs should maintain appropriate logs and monitoring for important systems, accounts, and security events.
+
+Monitoring can help identify suspicious activity and provide useful information during incident investigation.
+
+## 8. Prepare an Incident Response Plan
+
+An SME should have a basic incident response plan that identifies:
+
+- Who is responsible for coordinating the response
+- Who should be contacted during an incident
+- How incidents should be reported
+- How affected systems should be contained
+- How business operations should be restored
+
+The plan should be reviewed and practiced periodically.
+
+NIST's SME guidance recommends establishing responsibilities, contacts, reporting procedures, and response actions before an incident occurs. :contentReference[oaicite:1]{index=1}
+
+## 9. Protect Sensitive Information
+
+Sensitive business and customer information should be protected using appropriate access controls, authentication, encryption, and monitoring.
+
+Additional safeguards should be considered for information such as financial information, personal information, healthcare information, and business credentials.
+
+## 10. Review Cybersecurity Risks Regularly
+
+Cybersecurity risk assessment should not be treated as a one-time activity.
+
+SMEs should periodically review:
+
+- New assets
+- New threats
+- Vulnerabilities
+- Security incidents
+- Changes in business operations
+- Effectiveness of existing controls
+- Residual risks
+
+The risk assessment should be updated when significant changes occur.
+
+## 11. Prioritize Controls According to Risk
+
+SMEs often have limited budgets and personnel.
+
+Therefore, cybersecurity controls should be prioritized according to the organization's most significant risks rather than attempting to implement every possible security measure simultaneously.
+
+## 12. Assign Cybersecurity Responsibilities
+
+Even when an SME does not have a dedicated cybersecurity team, responsibility for cybersecurity should be clearly assigned.
+
+Someone should be responsible for coordinating risk assessment, security controls, incident response, and periodic reviews.
+
+## Best-Practice Summary
+
+The most important principle for SMEs is to establish a practical, risk-based cybersecurity program rather than attempting to implement every security control at once.
+
+A practical progression is:
+
+**Identify Assets**
+→ **Identify Risks**
+→ **Prioritize Risks**
+→ **Implement Appropriate Controls**
+→ **Monitor**
+→ **Respond**
+→ **Recover**
+→ **Review and Improve**
+
+These practices should be adapted to the organization's size, resources, business environment, and applicable legal or regulatory requirements. NIST's CSF 2.0 Small Business Quick-Start Guide is intended to help SMBs begin this type of risk-management process. :contentReference[oaicite:2]{index=2}
+
+## Final Conclusion
+
+The project demonstrates that a structured cybersecurity risk assessment can help SMEs identify important threats, prioritize risks, select appropriate controls, and evaluate residual risk.
+
+The case-study validation showed that the same assessment methodology can be applied across different business environments while allowing risks and mitigation strategies to be adapted to each organization's specific circumstances.
+
+A risk-based approach allows SMEs to focus limited resources on the cybersecurity risks that could have the greatest effect on their business operations, information, and customers.
