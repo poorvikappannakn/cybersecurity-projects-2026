@@ -401,3 +401,73 @@ The expected residual likelihood is reduced from 4 (High) to 2 (Low), while the 
 #### Validation Result
 
 The framework identified ransomware affecting electronic health records and patient information as a critical risk in the healthcare environment. The result demonstrates that the framework can account for the high importance of sensitive information and operational continuity when prioritizing risks.
+
+---
+
+# Validation Findings
+
+## Overall Findings
+
+The framework was applied to three fictional SME environments: a retail and e-commerce business, an IT services company, and a healthcare clinic.
+
+The same likelihood and impact scoring methodology was maintained across all three case studies. The business context, assets, threats, vulnerabilities, and recommended controls were adapted according to each organization's environment.
+
+## Finding 1 — The Framework Identifies Business-Specific Risks
+
+The primary risks differed according to the nature of each business:
+
+- **Retail & E-commerce:** Unauthorized account access was prioritized because of the organization's customer-facing online services and customer information.
+- **IT Services:** Privileged account compromise was prioritized because administrative access and client-related systems represent important assets.
+- **Healthcare / Clinic:** Ransomware was prioritized because disruption to electronic health records and healthcare operations could have significant consequences.
+
+This demonstrates that the framework can be applied to different SME environments rather than relying on a fixed list of identical priorities.
+
+## Finding 2 — The Scoring Methodology Remains Consistent
+
+The same 1–5 likelihood and 1–5 impact scales were used for every case study.
+
+The risk score was calculated using:
+
+**Risk Score = Likelihood × Impact**
+
+This provides a consistent method for comparing risks while allowing the underlying business context to influence the selected risks and ratings.
+
+## Finding 3 — Mitigation Reduces but Does Not Eliminate Risk
+
+The case studies demonstrated that applying recommended controls can reduce the expected likelihood of a successful incident.
+
+For all three primary risks, the initial risk score was:
+
+**4 × 5 = 20 — Critical**
+
+After applying the proposed controls, the expected residual risk became:
+
+**2 × 5 = 10 — High**
+
+This demonstrates the concept of residual risk: security controls can reduce risk, but they do not necessarily eliminate the potential consequences of a successful attack.
+
+## Finding 4 — Different Businesses Require Different Controls
+
+Although the same assessment methodology was used, the recommended controls differed according to the business environment.
+
+Examples include:
+
+- Retail & E-commerce → MFA, account monitoring, access controls, and security logging.
+- IT Services → privileged account controls, RBAC, least privilege, and administrative monitoring.
+- Healthcare / Clinic → patch management, backup restoration testing, isolated backups, and incident response.
+
+This demonstrates that mitigation strategies should be selected according to the organization's assets, vulnerabilities, and operational requirements.
+
+## Finding 5 — The Framework Supports Repeatable Assessment
+
+The case studies followed the same sequence:
+
+**Business Environment → Assets → Threats → Vulnerabilities → Likelihood → Impact → Risk Score → NIST CSF Mapping → Mitigation → Residual Risk**
+
+Using the same sequence across different businesses provides a repeatable assessment process that can be reused for other SME environments.
+
+## Validation Conclusion
+
+The case-study results indicate that the proposed framework can be used to identify, prioritize, and mitigate cybersecurity risks in different SME environments while maintaining a consistent risk evaluation methodology.
+
+The validation also demonstrates that risk priorities and mitigation strategies should be adapted to the specific business context rather than applying identical cybersecurity controls to every organization.
