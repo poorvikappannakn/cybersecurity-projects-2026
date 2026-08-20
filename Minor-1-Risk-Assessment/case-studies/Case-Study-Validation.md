@@ -212,3 +212,39 @@ The framework will be considered useful if it:
 All three businesses described in this document are fictional scenarios created for project validation.
 
 Business characteristics, risk scores, likelihood values, impact values, and residual-risk values used later in the assessment are project assumptions unless explicitly supported by an external source.
+
+---
+
+# Validation Results
+
+## Comparative Risk Assessment
+
+The same 1–5 likelihood and 1–5 impact methodology is applied to each case study.
+
+| Case Study | Primary Risk | Likelihood | Impact | Initial Risk | Risk Level | Residual Risk | Residual Level |
+|---|---|---:|---:|---:|---|---:|---|
+| Retail & E-commerce | To be assessed | - | - | - | - | - | - |
+| IT Services | To be assessed | - | - | - | - | - | - |
+| Healthcare / Clinic | To be assessed | - | - | - | - | - | - |
+
+## Validation Observation
+
+The framework is expected to produce different risk priorities across the three businesses because their assets, operations, vulnerabilities, and security requirements differ.
+
+The scoring methodology itself remains unchanged.
+
+Detailed risk assessments for each case study will be documented below.
+
+## Case Study Risk Assessments
+
+### Retail & E-commerce
+
+To be completed.
+
+### IT Services
+
+To be completed.
+
+### Healthcare / Clinic
+
+To be completed.
