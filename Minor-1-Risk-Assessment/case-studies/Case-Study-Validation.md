@@ -8,7 +8,7 @@ The purpose of the validation is to determine whether the framework can identify
 
 ## Validation Approach
 
-Each case study will follow the same assessment process:
+Each case study follows the same assessment process:
 
 1. Define the business environment.
 2. Identify critical assets.
@@ -22,20 +22,193 @@ Each case study will follow the same assessment process:
 10. Recommend mitigation controls.
 11. Reassess residual risk.
 
-## Case Studies
+The scoring methodology remains unchanged across all case studies.
 
-### Case Study 1 — Retail & E-commerce SME
+---
 
-A small retail and e-commerce business with customer-facing online services, payment-related systems, employee accounts, and customer information.
+# Case Study 1 — Retail & E-commerce SME
 
-### Case Study 2 — Small IT Services Company
+## Business Profile
 
-A small IT services organization that manages business systems, employee accounts, client information, cloud services, and technical infrastructure.
+**Business Type:** Small Retail & E-commerce Business  
+**Employees:** 15  
+**Operations:** Physical retail store and online e-commerce platform
 
-### Case Study 3 — Small Healthcare/Clinic Business
+## Critical Assets
 
-A small healthcare organization that handles patient information, electronic records, employee accounts, and healthcare-related systems.
+1. Customer information
+2. E-commerce platform
+3. Payment/POS systems
+4. Employee accounts
+5. Business laptops
+6. Business documents
+7. Internal network
 
-## Validation Principle
+## Baseline Security Posture
 
-The same risk assessment methodology will be applied to all three case studies. Differences in risk priorities should result from differences in business assets, operations, vulnerabilities, and potential impacts rather than from changes to the scoring methodology.
+- Basic endpoint protection is deployed.
+- Password-based authentication is used for business accounts.
+- Multi-factor authentication (MFA) is not consistently enabled.
+- Basic access controls are in place.
+- Security awareness training is informal.
+- Business backups are maintained.
+- There is no dedicated cybersecurity team.
+- Centralized security monitoring is limited.
+
+## Assessment Objective
+
+The framework is applied to determine whether it can identify and prioritize risks associated with customer information, online services, authentication, payment-related systems, and employee access.
+
+## Source Basis
+
+The business scenario is fictional and the business characteristics are project assumptions.
+
+NIST guidance was used to inform the types of cybersecurity considerations relevant to small businesses and e-commerce environments, particularly authentication, MFA, and logging.
+
+NIST's e-commerce guidance demonstrates the relevance of stronger authentication and authentication-related logging in online retail environments.
+
+---
+
+# Case Study 2 — Small IT Services Company
+
+## Business Profile
+
+**Business Type:** Small IT Services Company  
+**Employees:** 20  
+**Operations:** Provides technical support, software services, cloud administration, and IT consulting to business clients.
+
+## Critical Assets
+
+1. Client information
+2. Employee accounts
+3. Administrative accounts
+4. Cloud services
+5. Source code and technical documentation
+6. Company laptops
+7. Client credentials and configuration information
+8. Internal network
+
+## Baseline Security Posture
+
+- Endpoint protection is deployed on company laptops.
+- Password-based authentication is widely used.
+- MFA is enabled for some critical services but is not consistently enforced.
+- Employees have access to multiple cloud-based services.
+- Administrative privileges are limited but not regularly reviewed.
+- Security monitoring is limited.
+- Software and system updates are performed but are not centrally tracked.
+- There is no dedicated internal security team.
+
+## Assessment Objective
+
+The framework is applied to determine whether it can identify and prioritize risks associated with privileged accounts, cloud services, client information, administrative access, software vulnerabilities, and employee devices.
+
+## Expected Risk Characteristics
+
+Because the company provides IT services and may hold client credentials and administrative access, compromise of an employee or administrative account could potentially affect both the company and its clients.
+
+The case study therefore provides an opportunity to evaluate whether the framework appropriately prioritizes risks involving:
+
+- Privileged access
+- Weak authentication
+- Cloud account compromise
+- Unpatched systems
+- Insider misuse
+- Client information exposure
+
+## Source Basis
+
+The business scenario is fictional and the business characteristics are project assumptions.
+
+NIST's small-business guidance emphasizes that cybersecurity risk management should be adapted to an organization's size, resources, environment, and requirements. This case study applies that principle to an IT-services environment.
+
+---
+
+# Case Study 3 — Small Healthcare / Clinic Business
+
+## Business Profile
+
+**Business Type:** Small Healthcare Clinic  
+**Employees:** 18  
+**Operations:** Provides outpatient healthcare services and maintains electronic patient records.
+
+## Critical Assets
+
+1. Patient information
+2. Electronic health records
+3. Employee accounts
+4. Clinical workstations
+5. Medical and administrative systems
+6. Backup systems
+7. Internal network
+8. Telehealth or online communication systems
+
+## Baseline Security Posture
+
+- Endpoint protection is deployed.
+- Password-based authentication is used.
+- MFA is not consistently enabled across all accounts.
+- Access to patient information is role-based but access reviews are irregular.
+- Backups are maintained.
+- Security awareness training is provided informally.
+- Software updates are performed but are not centrally managed.
+- There is no dedicated cybersecurity team.
+
+## Assessment Objective
+
+The framework is applied to determine whether it can identify and prioritize risks associated with patient information, electronic health records, employee accounts, clinical workstations, and healthcare-related systems.
+
+## Expected Risk Characteristics
+
+Healthcare environments can have significant confidentiality, integrity, and availability requirements because cybersecurity incidents can affect sensitive patient information and clinical operations.
+
+The case study therefore provides an opportunity to evaluate whether the framework appropriately prioritizes risks involving:
+
+- Patient information exposure
+- Ransomware
+- Unauthorized access
+- Weak authentication
+- Unpatched clinical systems
+- Backup and recovery
+
+## Source Basis
+
+The business scenario is fictional and the business characteristics are project assumptions.
+
+NIST provides healthcare-specific cybersecurity resources addressing electronic health information and cybersecurity practices for small healthcare organizations. These resources were used to inform the types of assets and cybersecurity considerations included in this scenario.
+
+---
+
+# Cross-Case Validation
+
+The same risk assessment methodology is applied to all three businesses.
+
+The framework does not change its scoring rules based on the business type.
+
+Instead, the business environment changes:
+
+**Business Type**
+→ **Assets**
+→ **Threats**
+→ **Vulnerabilities**
+→ **Risk Priorities**
+
+This allows the framework to be evaluated for adaptability across different SME environments.
+
+## Validation Criteria
+
+The framework will be considered useful if it:
+
+1. Identifies risks relevant to each business.
+2. Produces different risk priorities when business assets and vulnerabilities differ.
+3. Provides a consistent and repeatable scoring process.
+4. Maps identified risks to relevant NIST CSF Functions.
+5. Produces practical mitigation recommendations.
+6. Allows residual risk to be reassessed after mitigation.
+7. Remains understandable and practical for an SME environment.
+
+## Important Assumption
+
+All three businesses described in this document are fictional scenarios created for project validation.
+
+Business characteristics, risk scores, likelihood values, impact values, and residual-risk values used later in the assessment are project assumptions unless explicitly supported by an external source.
