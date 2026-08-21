@@ -1,0 +1,20 @@
+services:
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: minor2-keycloak
+    command: start-dev
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: Minor2Admin@2026
+    ports:
+      - "8080:8080"
+
+  api:
+    build:
+      context: ./application
+    container_name: minor2-api
+    ports:
+      - "8000:8000"
+    depends_on:
+      - keycloak
