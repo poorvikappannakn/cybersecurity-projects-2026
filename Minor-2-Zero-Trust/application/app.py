@@ -87,9 +87,8 @@ def verify_token(token: str = Depends(security)):
             public_key,
             algorithms=["RS256"],
             issuer=KEYCLOAK_ISSUER,
-            options={"verify_aud": False},
+            audience="enterprise-api",
         )
-
         username = payload.get(
             "preferred_username",
             "unknown",
