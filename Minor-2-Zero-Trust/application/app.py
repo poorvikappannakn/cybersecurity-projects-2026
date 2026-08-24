@@ -1,8 +1,9 @@
-from fastapi import FastAPI, Depends, HTTPException, status
+from fastapi import FastAPI, Depends, HTTPException, status, Request
 from fastapi.security import OAuth2AuthorizationCodeBearer
 import logging
 import jwt
 import httpx
+
 
 logging.basicConfig(
     level=logging.INFO,
@@ -17,6 +18,17 @@ app = FastAPI(
     description="Protected enterprise resources for the Minor Project 2 Zero Trust lab.",
     version="2.0.0",
 )
+
+
+@app.middleware("http")
+async def add_security_headers(request: Request, call_next):
+    response = await call_next(request)
+
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["Referrer-Policy"] = "no-referrer"
+
+    return response
 
 
 KEYCLOAK_ISSUER = "http://localhost:8080/realms/Enterprise-Zero-Trust"

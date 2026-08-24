@@ -32,3 +32,17 @@ def test_admin_rejects_invalid_token():
         headers={"Authorization": "Bearer invalid-token"},
     )
     assert response.status_code == 401
+
+def test_content_type_options_header():
+    response = requests.get(f"{BASE_URL}/")
+    assert response.headers.get("X-Content-Type-Options") == "nosniff"
+
+
+def test_frame_options_header():
+    response = requests.get(f"{BASE_URL}/")
+    assert response.headers.get("X-Frame-Options") == "DENY"
+
+
+def test_referrer_policy_header():
+    response = requests.get(f"{BASE_URL}/")
+    assert response.headers.get("Referrer-Policy") == "no-referrer"    
