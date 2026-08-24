@@ -1,13 +1,23 @@
 from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.security import OAuth2AuthorizationCodeBearer
+import logging
 import jwt
 import httpx
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s | %(levelname)s | %(message)s",
+)
+
+logger = logging.getLogger("zero-trust-api")
+
 
 app = FastAPI(
     title="Zero Trust Enterprise API",
     description="Protected enterprise resources for the Minor Project 2 Zero Trust lab.",
     version="2.0.0",
 )
+
 
 KEYCLOAK_ISSUER = "http://localhost:8080/realms/Enterprise-Zero-Trust"
 
@@ -16,6 +26,7 @@ KEYCLOAK_JWKS_URL = (
     "realms/Enterprise-Zero-Trust/"
     "protocol/openid-connect/certs"
 )
+
 
 security = OAuth2AuthorizationCodeBearer(
     authorizationUrl=(
@@ -48,6 +59,10 @@ def verify_token(token: str = Depends(security)):
         )
 
         if key is None:
+            logger.warning(
+                "Authentication failed: signing key not found"
+            )
+
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail="Unable to find signing key.",
@@ -63,15 +78,33 @@ def verify_token(token: str = Depends(security)):
             options={"verify_aud": False},
         )
 
+        username = payload.get(
+            "preferred_username",
+            "unknown",
+        )
+
+        logger.info(
+            "Authentication successful: user=%s",
+            username,
+        )
+
         return payload
 
     except jwt.PyJWTError:
+        logger.warning(
+            "Authentication failed: invalid or expired access token"
+        )
+
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid or expired access token.",
         )
 
     except httpx.HTTPError:
+        logger.error(
+            "Authentication service error: unable to reach Keycloak"
+        )
+
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             detail="Unable to reach Keycloak.",
@@ -79,15 +112,46 @@ def verify_token(token: str = Depends(security)):
 
 
 def require_roles(*allowed_roles):
-    def role_checker(token: dict = Depends(verify_token)):
-        realm_access = token.get("realm_access", {})
-        user_roles = realm_access.get("roles", [])
+    def role_checker(
+        token: dict = Depends(verify_token),
+    ):
+        realm_access = token.get(
+            "realm_access",
+            {},
+        )
 
-        if not any(role in user_roles for role in allowed_roles):
+        user_roles = realm_access.get(
+            "roles",
+            [],
+        )
+
+        username = token.get(
+            "preferred_username",
+            "unknown",
+        )
+
+        if not any(
+            role in user_roles
+            for role in allowed_roles
+        ):
+            logger.warning(
+                "Authorization denied: user=%s roles=%s required=%s",
+                username,
+                user_roles,
+                allowed_roles,
+            )
+
             raise HTTPException(
                 status_code=status.HTTP_403_FORBIDDEN,
                 detail="Insufficient permissions.",
             )
+
+        logger.info(
+            "Authorization granted: user=%s roles=%s required=%s",
+            username,
+            user_roles,
+            allowed_roles,
+        )
 
         return token
 
@@ -112,7 +176,9 @@ def public_resource():
 
 @app.get("/api/employee")
 def employee_resource(
-    token: dict = Depends(require_roles("employee", "admin")),
+    token: dict = Depends(
+        require_roles("employee", "admin")
+    ),
 ):
     return {
         "resource": "employee",
@@ -122,7 +188,9 @@ def employee_resource(
 
 @app.get("/api/admin")
 def admin_resource(
-    token: dict = Depends(require_roles("admin")),
+    token: dict = Depends(
+        require_roles("admin")
+    ),
 ):
     return {
         "resource": "admin",
