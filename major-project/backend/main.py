@@ -1,5 +1,10 @@
 from fastapi import FastAPI
+
 from backend.api.health import router as health_router
+from backend.database.connection import Base, engine
+from backend.models.campaign import Campaign
+
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
