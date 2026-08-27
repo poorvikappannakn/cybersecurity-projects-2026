@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from backend.models.participant import Participant
 
 from backend.api.health import router as health_router
 from backend.database.connection import Base, engine
