@@ -37,6 +37,19 @@ def create_event(
     db: Session = Depends(get_db),
     current_user: dict = Depends(get_current_user)
 ):
+    allowed_event_types = {
+        "email_delivered",
+        "email_opened",
+        "link_clicked",
+        "credential_submitted"
+    }
+
+    if request.event_type not in allowed_event_types:
+        raise HTTPException(
+            status_code=400,
+            detail="Invalid event type"
+        )
+
     participant = db.query(Participant).filter(
         Participant.id == request.participant_id
     ).first()
@@ -61,6 +74,12 @@ def create_event(
         raise HTTPException(
             status_code=400,
             detail="Participant does not belong to this campaign"
+        )
+
+    if campaign.status != "active":
+        raise HTTPException(
+            status_code=400,
+            detail="Campaign is not active"
         )
 
     event = Event(
