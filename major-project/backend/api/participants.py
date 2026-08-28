@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 from backend.database.connection import SessionLocal
 from backend.models.participant import Participant
 from backend.models.campaign import Campaign
+from backend.models.event import Event
 from backend.services.rbac import require_role
 from backend.services.security import get_current_user
 
@@ -86,3 +87,54 @@ def get_participant(
         )
 
     return participant
+
+
+@router.get("/{participant_id}/assessment")
+def get_participant_assessment(
+    participant_id: int,
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(require_role("admin"))
+):
+    participant = db.query(Participant).filter(
+        Participant.id == participant_id
+    ).first()
+
+    if not participant:
+        raise HTTPException(
+            status_code=404,
+            detail="Participant not found"
+        )
+
+    events = db.query(Event).filter(
+        Event.participant_id == participant_id
+    ).all()
+
+    score = 0
+
+    for event in events:
+        if event.event_type == "email_opened":
+            score += 10
+
+        elif event.event_type == "link_clicked":
+            score += 30
+
+        elif event.event_type == "credential_submitted":
+            score += 60
+
+    if score >= 60:
+        risk_level = "high"
+    elif score >= 30:
+        risk_level = "medium"
+    elif score > 0:
+        risk_level = "low"
+    else:
+        risk_level = "no_risky_interaction"
+
+    return {
+        "participant_id": participant.id,
+        "identifier": participant.identifier,
+        "campaign_id": participant.campaign_id,
+        "events_recorded": len(events),
+        "risk_score": score,
+        "risk_level": risk_level
+    }
