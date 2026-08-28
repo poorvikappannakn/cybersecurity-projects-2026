@@ -8,6 +8,8 @@ from backend.database.connection import Base, engine
 from backend.models.campaign import Campaign
 from backend.api.auth import router as auth_router
 from backend.api.campaigns import router as campaigns_router
+from backend.api.participants import router as participants_router
+from backend.api.events import router as events_router
 
 Base.metadata.create_all(bind=engine)
 
@@ -19,3 +21,5 @@ def home():
     return {"message": "Phishing Awareness Simulation API"}
 
 app.include_router(health_router)
+app.include_router(participants_router)
+app.include_router(events_router)
