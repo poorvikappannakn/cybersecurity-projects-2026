@@ -110,6 +110,7 @@ def update_campaign_status(
         )
 
     campaign.status = request.status
+
     db.commit()
     db.refresh(campaign)
 
@@ -168,4 +169,60 @@ def get_campaign_analytics(
         "emails_opened": emails_opened,
         "links_clicked": links_clicked,
         "credentials_submitted": credentials_submitted
+    }
+
+
+@router.get("/{campaign_id}/report")
+def get_campaign_report(
+    campaign_id: int,
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(require_role("admin"))
+):
+    campaign = db.query(Campaign).filter(
+        Campaign.id == campaign_id
+    ).first()
+
+    if not campaign:
+        raise HTTPException(
+            status_code=404,
+            detail="Campaign not found"
+        )
+
+    total_participants = db.query(Participant).filter(
+        Participant.campaign_id == campaign_id
+    ).count()
+
+    links_clicked = db.query(Event).filter(
+        Event.campaign_id == campaign_id,
+        Event.event_type == "link_clicked"
+    ).count()
+
+    credentials_submitted = db.query(Event).filter(
+        Event.campaign_id == campaign_id,
+        Event.event_type == "credential_submitted"
+    ).count()
+
+    if total_participants > 0:
+        click_rate = round(
+            (links_clicked / total_participants) * 100,
+            2
+        )
+
+        credential_submission_rate = round(
+            (credentials_submitted / total_participants) * 100,
+            2
+        )
+    else:
+        click_rate = 0
+        credential_submission_rate = 0
+
+    return {
+        "campaign_id": campaign.id,
+        "campaign_name": campaign.name,
+        "campaign_status": campaign.status,
+        "total_participants": total_participants,
+        "links_clicked": links_clicked,
+        "credentials_submitted": credentials_submitted,
+        "click_rate_percent": click_rate,
+        "credential_submission_rate_percent": credential_submission_rate
     }
