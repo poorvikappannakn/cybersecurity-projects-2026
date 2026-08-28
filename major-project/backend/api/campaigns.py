@@ -226,3 +226,97 @@ def get_campaign_report(
         "click_rate_percent": click_rate,
         "credential_submission_rate_percent": credential_submission_rate
     }
+
+
+@router.get("/{campaign_id}/dashboard")
+def get_campaign_dashboard(
+    campaign_id: int,
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(require_role("admin"))
+):
+    campaign = db.query(Campaign).filter(
+        Campaign.id == campaign_id
+    ).first()
+
+    if not campaign:
+        raise HTTPException(
+            status_code=404,
+            detail="Campaign not found"
+        )
+
+    participants = db.query(Participant).filter(
+        Participant.campaign_id == campaign_id
+    ).all()
+
+    total_participants = len(participants)
+
+    total_events = db.query(Event).filter(
+        Event.campaign_id == campaign_id
+    ).count()
+
+    emails_opened = db.query(Event).filter(
+        Event.campaign_id == campaign_id,
+        Event.event_type == "email_opened"
+    ).count()
+
+    links_clicked = db.query(Event).filter(
+        Event.campaign_id == campaign_id,
+        Event.event_type == "link_clicked"
+    ).count()
+
+    credentials_submitted = db.query(Event).filter(
+        Event.campaign_id == campaign_id,
+        Event.event_type == "credential_submitted"
+    ).count()
+
+    participant_results = []
+
+    for participant in participants:
+        events = db.query(Event).filter(
+            Event.participant_id == participant.id,
+            Event.campaign_id == campaign_id
+        ).all()
+
+        score = 0
+
+        for event in events:
+            if event.event_type == "email_opened":
+                score += 10
+            elif event.event_type == "link_clicked":
+                score += 30
+            elif event.event_type == "credential_submitted":
+                score += 60
+
+        if score >= 60:
+            risk_level = "high"
+        elif score >= 30:
+            risk_level = "medium"
+        elif score > 0:
+            risk_level = "low"
+        else:
+            risk_level = "no_risky_interaction"
+
+        participant_results.append({
+            "participant_id": participant.id,
+            "identifier": participant.identifier,
+            "risk_score": score,
+            "risk_level": risk_level,
+            "events_recorded": len(events)
+        })
+
+    return {
+        "campaign": {
+            "id": campaign.id,
+            "name": campaign.name,
+            "description": campaign.description,
+            "status": campaign.status
+        },
+        "summary": {
+            "total_participants": total_participants,
+            "total_events": total_events,
+            "emails_opened": emails_opened,
+            "links_clicked": links_clicked,
+            "credentials_submitted": credentials_submitted
+        },
+        "participants": participant_results
+    }
