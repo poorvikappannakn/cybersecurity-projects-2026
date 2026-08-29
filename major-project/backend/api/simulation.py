@@ -74,6 +74,21 @@ def simulate_link_click(
         db
     )
 
+    existing_event = db.query(Event).filter(
+        Event.participant_id == participant.id,
+        Event.campaign_id == campaign.id,
+        Event.event_type == "link_clicked"
+    ).first()
+
+    if existing_event:
+        return {
+            "message": "Simulation interaction already recorded",
+            "event_id": existing_event.id,
+            "participant_id": participant.id,
+            "campaign_id": campaign.id,
+            "event_type": existing_event.event_type
+        }
+
     event = Event(
         participant_id=participant.id,
         campaign_id=campaign.id,
@@ -238,6 +253,22 @@ def simulation_email(
         participant_id,
         db
     )
+
+    existing_event = db.query(Event).filter(
+        Event.participant_id == participant.id,
+        Event.campaign_id == campaign.id,
+        Event.event_type == "email_opened"
+    ).first()
+
+    if not existing_event:
+        event = Event(
+            participant_id=participant.id,
+            campaign_id=campaign.id,
+            event_type="email_opened"
+        )
+
+        db.add(event)
+        db.commit()
 
     simulation_link = (
         f"/api/simulation/landing/"
