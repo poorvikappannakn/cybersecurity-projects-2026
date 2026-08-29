@@ -109,24 +109,35 @@ def get_participant_assessment(
         Event.participant_id == participant_id
     ).all()
 
+    email_opened_count = 0
+    link_clicked_count = 0
+    credential_submitted_count = 0
+
     score = 0
 
     for event in events:
+
         if event.event_type == "email_opened":
+            email_opened_count += 1
             score += 10
 
         elif event.event_type == "link_clicked":
+            link_clicked_count += 1
             score += 30
 
         elif event.event_type == "credential_submitted":
+            credential_submitted_count += 1
             score += 60
 
     if score >= 60:
         risk_level = "high"
+
     elif score >= 30:
         risk_level = "medium"
+
     elif score > 0:
         risk_level = "low"
+
     else:
         risk_level = "no_risky_interaction"
 
@@ -135,6 +146,11 @@ def get_participant_assessment(
         "identifier": participant.identifier,
         "campaign_id": participant.campaign_id,
         "events_recorded": len(events),
+        "event_breakdown": {
+            "emails_opened": email_opened_count,
+            "links_clicked": link_clicked_count,
+            "credentials_submitted": credential_submitted_count
+        },
         "risk_score": score,
         "risk_level": risk_level
     }
