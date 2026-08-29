@@ -8,6 +8,7 @@ from backend.models.participant import Participant
 from backend.models.event import Event
 from backend.services.rbac import require_role
 from backend.services.security import get_current_user
+from backend.services.audit import record_audit
 
 
 router = APIRouter(
@@ -48,6 +49,13 @@ def create_campaign(
     db.add(campaign)
     db.commit()
     db.refresh(campaign)
+
+    record_audit(
+        db,
+        current_user,
+        "CREATE_CAMPAIGN",
+        f"Created campaign {campaign.id}: {campaign.name}"
+    )
 
     return {
         "message": "Campaign created successfully",
@@ -101,7 +109,11 @@ def update_campaign_status(
             detail="Campaign not found"
         )
 
-    allowed_statuses = {"draft", "active", "completed"}
+    allowed_statuses = {
+        "draft",
+        "active",
+        "completed"
+    }
 
     if request.status not in allowed_statuses:
         raise HTTPException(
@@ -109,10 +121,20 @@ def update_campaign_status(
             detail="Invalid campaign status"
         )
 
+    old_status = campaign.status
+
     campaign.status = request.status
 
     db.commit()
     db.refresh(campaign)
+
+    record_audit(
+        db,
+        current_user,
+        "UPDATE_CAMPAIGN_STATUS",
+        f"Campaign {campaign.id} changed from "
+        f"{old_status} to {campaign.status}"
+    )
 
     return {
         "message": "Campaign status updated",
@@ -282,17 +304,22 @@ def get_campaign_dashboard(
         for event in events:
             if event.event_type == "email_opened":
                 score += 10
+
             elif event.event_type == "link_clicked":
                 score += 30
+
             elif event.event_type == "credential_submitted":
                 score += 60
 
         if score >= 60:
             risk_level = "high"
+
         elif score >= 30:
             risk_level = "medium"
+
         elif score > 0:
             risk_level = "low"
+
         else:
             risk_level = "no_risky_interaction"
 
